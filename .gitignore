@@ -1,0 +1,17 @@
+.dockerignore
+*.swp
+*.log
+*.vagrant
+vagrant/extra
+terraform/.terraform/
+data/db/auto.cnf
+data/db/ibtmp1
+data/db/ib_logfile0
+data/db/ib_logfile1
+data/db/ib_buffer_pool
+data/wp/wp-config.php
+config.ign.merged
+config1.img
+config1.vmdk
+packer_cache
+

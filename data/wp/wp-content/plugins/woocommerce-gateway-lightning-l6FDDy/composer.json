@@ -1,0 +1,11 @@
+{
+    "name": "elementsproject/woocommerce-gateway-lightning",
+    "description": "WooCommerce Gateway Plugin for Lightning Charge",
+    "version": "0.2.6",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "require": {
+        "bacon/bacon-qr-code": "^1.0",
+        "elementsproject/lightning-charge-client-php": "^0.1.3"
+    }
+}

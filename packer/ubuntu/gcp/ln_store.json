@@ -1,0 +1,38 @@
+{
+    "variables": 
+    {
+      "name": "store-in-a-box",
+      "zone": "us-east1-c",
+      "account_file": "service-acct.json",
+      "project_id": ""
+    },
+    "builders": 
+    [
+        {
+            "type": "googlecompute",
+            "project_id": "{{ user `project_id` }}",
+            "zone": "{{ user `zone` }}",
+            "source_image_family": "ubuntu-1804-lts",
+            "image_name": "ln-store-ubuntu-{{timestamp}}",
+            "image_family": "ln-store-ubuntu",
+            "machine_type": "n1-standard-4",
+            "disk_size": "400",
+            "instance_name": "{{ user `name` }}-{{timestamp}}",
+            "communicator": "ssh",
+            "ssh_username": "root",
+            "startup_script_file": "../../../src/startup/user-data.sh"
+        }
+    ],
+    "provisioners": 
+    [
+      {
+        "type": "shell",
+        "inline": ["sudo mkdir -p /extra/data/wp", "sudo mkdir -p /extra/data/db"]
+      },
+      {
+        "type": "file",
+        "source": "../../../data",
+        "destination": "/extra"
+      }
+    ]
+}

@@ -1,0 +1,22 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/bionic64"
+
+  config.vm.provider "virtualbox" do |v|
+    v.customize ["modifyvm", :id, "--nictype1", "virtio"]
+    v.memory = "4096"
+    v.cpus = 2
+    v.name = "ln-store"
+  end
+
+  config.vm.network "forwarded_port", guest: 18332, host: 18332
+  config.vm.network "forwarded_port", guest: 18333, host: 18333
+  config.vm.network "forwarded_port", guest: 9735, host: 9735
+  config.vm.network "forwarded_port", guest: 9112, host: 9112
+  config.vm.network "forwarded_port", guest: 80, host: 80
+
+  config.vm.synced_folder '/extra', '/extra'
+
+  config.vm.provision :shell,
+       path: "../../src/startup/user-data.sh",
+       privileged: true
+end
